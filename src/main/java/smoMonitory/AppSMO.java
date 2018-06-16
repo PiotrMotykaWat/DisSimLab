@@ -24,10 +24,10 @@ import jxl.write.WriteException;
 public class AppSMO {
 	public static void main(String[] args) {
 		try {
-			double maxVariance = 3.0;
+			double givenVariance = 3.0;
 			SimManager model = SimManager.getInstance();
 			// Powołanie Smo 
-			Smo smo = new Smo(maxVariance);
+			Smo smo = new Smo(givenVariance);
 			// Utworzenie otoczenia
 			Otoczenie generatorZgl = new Otoczenie(smo);
 			// Dwa sposoby zaplanowanego końca symulacji

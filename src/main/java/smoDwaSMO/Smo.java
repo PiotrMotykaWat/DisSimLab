@@ -7,10 +7,6 @@ package smoDwaSMO;
 
 import java.util.LinkedList;
 
-import smoDwaSMO.RozpocznijObsluge;
-import smoDwaSMO.SmoBis;
-import smoDwaSMO.ZakonczObsluge;
-import smoDwaSMO.Zgloszenie;
 import dissimlab.broker.INotificationEvent;
 import dissimlab.broker.IPublisher;
 import dissimlab.monitors.MonitoredVar;
@@ -32,20 +28,20 @@ public class Smo extends BasicSimObj
     public MonitoredVar MVczasy_oczekiwania;
     public MonitoredVar MVdlKolejki;
     public MonitoredVar MVutraconeZgl;
-    public double maxVariance;
+    public double givenVariance;
 	
-    public Smo(SmoBis smo, SimEventSemaphore semafor, double maxVariance) throws SimControlException
+    public Smo(SmoBis smo, SimEventSemaphore semafor, double givenVariance) throws SimControlException
     {
         // Utworzenie wewnętrznej listy w kolejce
-        this.maxVariance = maxVariance;
+        this.givenVariance = givenVariance;
         kolejka = new LinkedList <Zgloszenie>();
         // Nastepne SMO
         smoBis = smo;
         // Deklaracja zmiennych monitorowanych
-        MVczasy_obslugi = new MonitoredVar("Czasy obsługi", maxVariance);
-        MVczasy_oczekiwania = new MonitoredVar("Czasy oczekiwania", maxVariance);
-        MVdlKolejki = new MonitoredVar("Długość kolejki", maxVariance);
-        MVutraconeZgl = new MonitoredVar("Utracone zgłoszenia", maxVariance);
+        MVczasy_obslugi = new MonitoredVar("Czasy obsługi", givenVariance);
+        MVczasy_oczekiwania = new MonitoredVar("Czasy oczekiwania", givenVariance);
+        MVdlKolejki = new MonitoredVar("Długość kolejki", givenVariance);
+        MVutraconeZgl = new MonitoredVar("Utracone zgłoszenia", givenVariance);
         this.semafor = semafor;
     }
 

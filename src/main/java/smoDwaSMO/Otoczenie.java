@@ -16,7 +16,7 @@ public class Otoczenie extends BasicSimObj {
         // Powołanie instancji pierwszego zdarzenia
     	zglaszaj = new Zglaszaj(this, 0.0);
         // Deklaracja zmiennych monitorowanych
-        MVczasy_miedzy_zgl = new MonitoredVar("Czasy między zgłoszeniami", smo.maxVariance);
+        MVczasy_miedzy_zgl = new MonitoredVar("Czasy między zgłoszeniami", smo.givenVariance);
         // SMO dla zgłoszeń
         this.smo = smo;
 	}

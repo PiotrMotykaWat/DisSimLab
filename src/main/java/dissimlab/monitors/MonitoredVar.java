@@ -1,5 +1,7 @@
 package dissimlab.monitors;
 
+import java.math.BigDecimal;
+
 /**
  * Description...
  * 
@@ -12,19 +14,19 @@ public class MonitoredVar {
 	private Histogram histogram;
 	private ChangesList changes;
 	private double actualVal;
-	private double maxVariance;
+	private double givenVariance;
 
-	public MonitoredVar(String name, double maxVariance) {
+	public MonitoredVar(String name, double givenVariance) {
 		this.changes = new ChangesList();
 		this.name = name;
-		this.maxVariance = maxVariance;
+		this.givenVariance = givenVariance;
 	}
 
-	public MonitoredVar(double value, double maxVariance) {
+	public MonitoredVar(double value, double givenVariance) {
 		this.actualVal = value;
 		this.changes = new ChangesList();
 		this.changes.add(new Change(value));
-		this.maxVariance = maxVariance;
+		this.givenVariance = givenVariance;
 	}
 
 	public void setValue(double newValue) {
@@ -50,14 +52,14 @@ public class MonitoredVar {
 	private boolean checkVariance()
 	{
 		double variance = getVariance();
-		boolean con = variance < maxVariance;
+		boolean con = numberOfSamples() > 1 ? (variance < givenVariance) : false;
 
 		if(con)
 		{
-			System.out.println("MonitoredVar "+name+" RESET.");
+			System.out.println("MonitoredVar - "+name+" - RESET.");
 		}
-		System.out.println("Variance: "+variance);
-		System.out.println("MaxVariance: "+maxVariance);
+		System.out.println("MonitoredVar - "+name+" - Variance: "+variance);
+		System.out.println("MonitoredVar - "+name+" - givenVariance: "+ givenVariance);
 
 		return con;
 	}
@@ -82,7 +84,9 @@ public class MonitoredVar {
 			Change ch = changes.get(i);
 			sum += Math.pow(ch.getValue()-avg, 2.0);
 		}
-		return sum/numberOfSamples();
+		double var = sum/numberOfSamples();
+		return new BigDecimal(var).setScale(2,
+				BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 
 	private double calculateArithmeticAverage()
@@ -95,7 +99,8 @@ public class MonitoredVar {
 			sum += ch.getValue();
 		}
 
-		return sum/numberOfSamples();
+		return new BigDecimal(sum/numberOfSamples()).setScale(2,
+				BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 
 	private void resetVariable()

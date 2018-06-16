@@ -30,17 +30,17 @@ public class Smo extends BasicSimObj
     public MonitoredVar MVczasy_oczekiwania;
     //public MonitoredVar MVdlKolejki;
     //public MonitoredVar MVutraconeZgl;
-    public double maxVariance;
+    public double givenVariance;
 
 	
     /** Creates a new instance of Smo 
      * @throws SimControlException */
-    public Smo(double maxVariance) throws SimControlException
+    public Smo(double givenVariance) throws SimControlException
     {
         // Utworzenie wewnętrznej listy w kolejce
         kolejka = new LinkedList <Zgloszenie>();
         // Powołanie zmiennych monitorowanych
-        MVczasy_oczekiwania = new MonitoredVar("Czasy oczekiwania", maxVariance);
+        MVczasy_oczekiwania = new MonitoredVar("Czasy oczekiwania", givenVariance);
     }
 
     // Wstawienie zgłoszenia do kolejki

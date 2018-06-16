@@ -32,18 +32,18 @@ public class SmoBis extends BasicSimObj
     public MonitoredVar MVczasy_oczekiwania;
     public MonitoredVar MVdlKolejki;
 
-    public double maxVariance;
+    public double givenVariance;
 
-    public SmoBis(int maxDlKolejki, SimEventSemaphore semafor, double maxVariance) throws SimControlException
+    public SmoBis(int maxDlKolejki, SimEventSemaphore semafor, double givenVariance) throws SimControlException
     {
         kolejka = new LinkedList <Zgloszenie>();
         this.maxDlKolejki = maxDlKolejki;
         this.semafor = semafor;
         //
         // Deklaracja zmiennych monitorowanych
-        MVczasy_obslugi = new MonitoredVar("Czasy obsługi", maxVariance);
-        MVczasy_oczekiwania = new MonitoredVar("Czasy oczekiwania", maxVariance);
-        MVdlKolejki = new MonitoredVar("Długość kolejki", maxVariance);
+        MVczasy_obslugi = new MonitoredVar("Czasy obsługi", givenVariance);
+        MVczasy_oczekiwania = new MonitoredVar("Czasy oczekiwania", givenVariance);
+        MVdlKolejki = new MonitoredVar("Długość kolejki", givenVariance);
     }
 
     // Wstawienie zgłoszenia do kolejki

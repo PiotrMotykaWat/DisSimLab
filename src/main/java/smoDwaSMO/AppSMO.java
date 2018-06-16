@@ -29,16 +29,16 @@ public class AppSMO {
 	public static void main(String[] args) {
 		try {
 			//maxymalna wariancja
-			double maxVariance = 0.1;
+			double givenVariance = .4;
 			SimManager model = SimManager.getInstance();
 			//Utylizator zgłoszeń
 			UtylizatorKoncowy kosz = new UtylizatorKoncowy();
 			//Semafor
 			SimEventSemaphore semafor = new SimEventSemaphore("Semafor dla SMO");
 			// Powołanie 2-ego Smo
-			SmoBis smoBis = new SmoBis(5, semafor, maxVariance);
+			SmoBis smoBis = new SmoBis(5, semafor, givenVariance);
 			// Powołanie Smo nr 1 
-			Smo smo = new Smo(smoBis, semafor, maxVariance);
+			Smo smo = new Smo(smoBis, semafor, givenVariance);
 			// Utworzenie otoczenia
 			Otoczenie generatorZgl = new Otoczenie(smo);
 			// Dwa sposoby zaplanowanego końca symulacji
